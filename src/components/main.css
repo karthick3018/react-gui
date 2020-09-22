@@ -1,5 +1,7 @@
 .aside-wrapper{
   display: flex;
+  justify-content: space-between;
+  padding: 20px;
 }
 
 .right{
