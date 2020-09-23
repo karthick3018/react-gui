@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {reOrderWithInSampleArea} from '../../helpers/draggableFn';
+import {generatedElements} from '../../helpers/generateUiElements';
 import './main.css'
 
 const grid = 8;
@@ -29,60 +31,38 @@ class Main extends Component {
         checkValue : []
     };
 
-
     onDragEnd = result => {
      
         const { source, destination } = result;
 
         console.log('sourceeeee',source)
         console.log('destination',destination)
-        
       
-
-        // dropped outside the list
         if (!destination) {
             return;
         }
 
         if (source.droppableId === destination.droppableId) {
             if(source.droppableId==='droppable'){
-                let existingState = [...this.state.items];
-                const [movedElement] = existingState.splice(source.index,1)
-                existingState.splice(destination.index, 0, movedElement);
+                let reOrderedValue = reOrderWithInSampleArea(this.state.items,source.index,destination.index)
                 this.setState({
-                    items: existingState
+                    items: reOrderedValue
                 })
             }
             else{
-                let existingState = [...this.state.checkValue];
-                const [movedElement] = existingState.splice(source.index,1)
-                existingState.splice(destination.index, 0, movedElement);
+                let reOrderedValue = reOrderWithInSampleArea(this.state.checkValue,source.index,destination.index)
                 this.setState({
-                    checkValue: existingState
+                    checkValue: reOrderedValue
                 })
             }
                   
         } else {
-            //index - 0 -> button
-            //index - 1 -> input box
-            //index - 2 -> text area
-            let buffer = [];
-            if(source.index === 0){
-                buffer.push({id:'200',content:<button>I'm button</button>});
-            }
-            else if (source.index === 1){
-                buffer.push({id:'201',content:<input defaultValue="I'm input"></input>});
-            }
-            else if (source.index === 2){
-                buffer.push({id:'202',content:<textarea defaultValue="I'm text area"/>});
-            }
-             
-            this.setState(prevState => ({ checkValue: prevState.checkValue.concat(buffer)}))
+            let newHtmlElement = generatedElements(source.index,this.state.checkValue.length);
+ 
+            this.setState(prevState => ({ checkValue: prevState.checkValue.concat(newHtmlElement)}))
         }
     };
 
-    // Normally you would want to split things out into separate components.
-    // But in this example everything is just done in one place for simplicity
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
