@@ -2,39 +2,6 @@ import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './main.css'
 
-// fake data generator
-const getItems = (count, offset = 0) =>
-    Array.from({ length: count }, (v, k) => k).map(k => ({
-        id: `item-${k + offset}`,
-        content: `item ${k + offset}`
-    }));
-
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
-};
-
-/**
- * Moves an item from one list to another list.
- */
-const move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-    destClone.splice(droppableDestination.index, 0, removed);
-
-    const result = {};
-    result[droppableSource.droppableId] = sourceClone;
-    result[droppableDestination.droppableId] = destClone;
-
-    return result;
-};
-
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -58,22 +25,10 @@ const getListStyle = isDraggingOver => ({
 
 class Main extends Component {
     state = {
-        items: getItems(10),
-        selected: getItems(5, 10),
+        items: [{id:'100',content:<button>i'm button</button>},{id:'101',content:<input defaultValue="i'm input"></input>},{id:'102',content:<textarea defaultValue="i'm textarea"/>}],
         checkValue : []
     };
 
-    /**
-     * A semi-generic way to handle multiple lists. Matches
-     * the IDs of the droppable container to the names of the
-     * source arrays stored in the state.
-     */
-    id2List = {
-        droppable: 'items',
-        droppable2: 'selected'
-    };
-
-    getList = id => this.state[this.id2List[id]];
 
     onDragEnd = result => {
      
@@ -90,16 +45,39 @@ class Main extends Component {
         }
 
         if (source.droppableId === destination.droppableId) {
-            
+            if(source.droppableId==='droppable'){
+                let existingState = [...this.state.items];
+                const [movedElement] = existingState.splice(source.index,1)
+                existingState.splice(destination.index, 0, movedElement);
+                this.setState({
+                    items: existingState
+                })
+            }
+            else{
+                let existingState = [...this.state.checkValue];
+                const [movedElement] = existingState.splice(source.index,1)
+                existingState.splice(destination.index, 0, movedElement);
+                this.setState({
+                    checkValue: existingState
+                })
+            }
+                  
         } else {
-            let buffer = []
-
-            buffer.push({id:'200',content:<div>Aasdfasdfsdfasdfsdfsafsdf asdf asdf asdf asdfasdfasd fasd</div>});
-            buffer.push({id:'201',content:<button>kahufhur</button>});
-    
-           this.setState({
-             checkValue:  buffer
-           })
+            //index - 0 -> button
+            //index - 1 -> input box
+            //index - 2 -> text area
+            let buffer = [];
+            if(source.index === 0){
+                buffer.push({id:'200',content:<button>I'm button</button>});
+            }
+            else if (source.index === 1){
+                buffer.push({id:'201',content:<input defaultValue="I'm input"></input>});
+            }
+            else if (source.index === 2){
+                buffer.push({id:'202',content:<textarea defaultValue="I'm text area"/>});
+            }
+             
+            this.setState(prevState => ({ checkValue: prevState.checkValue.concat(buffer)}))
         }
     };
 
@@ -114,10 +92,11 @@ class Main extends Component {
                         <div
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}>
+                               {this.state.items.map((item, index) => (
                                 <Draggable
-                                    key={`100`}
-                                    draggableId={`100`}
-                                    index={1}>
+                                    key={item.id}
+                                    draggableId={item.id}
+                                    index={index}>
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
@@ -127,46 +106,11 @@ class Main extends Component {
                                                 snapshot.isDragging,
                                                 provided.draggableProps.style
                                             )}>
-                                          <button>{"i'm button"}</button>
+                                            {item.content}
                                         </div>
                                     )}
                                 </Draggable>
-
-                                <Draggable
-                                    key={`101`}
-                                    draggableId={`101`}
-                                    index={2}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}>
-                                          <input defaultValue="i'm input"/>
-                                        </div>
-                                    )}
-                                </Draggable>
-
-                                <Draggable
-                                    key={`102`}
-                                    draggableId={`102`}
-                                    index={3}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}>
-                                          <textarea defaultValue="i'm text area"/>
-                                        </div>
-                                    )}
-                                </Draggable>
+                            ))}  
                         </div>
                     )}
                 </Droppable>
@@ -199,7 +143,6 @@ class Main extends Component {
                         </div>
                     )}
                 </Droppable>
-                    {console.log('checkValue',this.state.checkValue && this.state.checkValue)}
                     </div>
             </DragDropContext>
         );
