@@ -6,9 +6,9 @@ import { reOrderWithInSampleArea } from '../../helpers/draggableFn';
 import { generatedElements } from '../../helpers/generateUiElements';
 import './main.css'
 
-const initialElements = [{ id: '100', content: <button>i'm button</button> },
-{ id: '101', content: <input defaultValue="i'm input"></input> },
-{ id: '102', content: <textarea defaultValue="i'm textarea" /> }
+const initialElements = [{ id: '100', content:"Button" },
+{ id: '101', content: "Input Box" },
+{ id: '102', content: "Textarea" }
 ]
 
 const Main = () => {

@@ -1,0 +1,6 @@
+.droppable-wrapper{
+  background-image: linear-gradient(to right, rgb(217, 226, 233) 1px, transparent 1px), linear-gradient(rgb(217, 226, 233) 1px, transparent 1px);
+  background-color: rgb(237, 242, 246);
+  width: 100%;
+  border: 1px solid;
+}

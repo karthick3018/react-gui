@@ -1,6 +1,7 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { getListStyle, getItemStyle } from '../../helpers/styleFn.js';
+import { getSidebarListStyle, getSidebarItemStyle } from '../../helpers/styleFn.js';
+import './sidebar.css';
 
 const SideBarRender = ({
     sidebarElements
@@ -10,7 +11,7 @@ const SideBarRender = ({
             {(provided, snapshot) => (
                 <div
                     ref={provided.innerRef}
-                    style={getListStyle(snapshot.isDraggingOver)}>
+                    style={getSidebarListStyle(snapshot.isDraggingOver)}>
                     {sidebarElements.map((item, index) => (
                         <Draggable
                             key={item.id}
@@ -21,7 +22,7 @@ const SideBarRender = ({
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
-                                    style={getItemStyle(
+                                    style={getSidebarItemStyle(
                                         snapshot.isDragging,
                                         provided.draggableProps.style
                                     )}>

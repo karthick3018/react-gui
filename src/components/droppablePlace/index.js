@@ -1,14 +1,17 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { getListStyle, getItemStyle } from '../../helpers/styleFn.js';
+import {  getDraggableItemStyle } from '../../helpers/styleFn.js';
+import './droppable.css'
 
 const DroppablePlace = ({ droppedElements }) => {
   return (
     <Droppable droppableId="droppable">
       {(provided, snapshot) => (
         <div
+          className="droppable-wrapper"
           ref={provided.innerRef}
-          style={getListStyle(snapshot.isDraggingOver)}>
+          // style={getDraggableListStyle(snapshot.isDraggingOver)}
+          >
           {droppedElements.map((item, index) => (
             <Draggable
               key={item.id}
@@ -19,7 +22,7 @@ const DroppablePlace = ({ droppedElements }) => {
                   ref={provided.innerRef}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
-                  style={getItemStyle(
+                  style={getDraggableItemStyle(
                     snapshot.isDragging,
                     provided.draggableProps.style
                   )}>

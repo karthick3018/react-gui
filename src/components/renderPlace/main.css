@@ -1,12 +1,8 @@
 .aside-wrapper{
   display: flex;
   padding: 20px;
-  margin: 10px 150px 0 0 
-}
-
-.right{
-  max-width: 500px;
+  max-width: 62.5em;
   width: 100%;
-  border:1px solid;
-  padding: 10px;
+  margin: 0 auto;
+  height: 100vh;
 }
