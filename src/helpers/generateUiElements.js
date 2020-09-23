@@ -6,7 +6,7 @@ export const returnRespectiveHtmlElement = (type) => {
       return <button>I'm button</button>
     case 1:
       return <input defaultValue="i'm input"/>
-     case 3:
+     case 2:
       return <textarea defaultValue="i'm text area"/> 
      default:
       return <></> 
