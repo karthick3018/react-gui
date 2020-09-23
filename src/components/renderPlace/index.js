@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import SideBarRender from '../sidebar';
 import DroppablePlace from '../droppablePlace';
@@ -6,19 +6,17 @@ import {reOrderWithInSampleArea} from '../../helpers/draggableFn';
 import {generatedElements} from '../../helpers/generateUiElements';
 import './main.css'
 
+const initialElements = [{id:'100',content:<button>i'm button</button>},
+                         {id:'101',content:<input defaultValue="i'm input"></input>},
+                         {id:'102',content:<textarea defaultValue="i'm textarea"/>}
+                        ]
 
-class Main extends Component {
-    state = {
-        items: [{id:'100',content:<button>i'm button</button>},{id:'101',content:<input defaultValue="i'm input"></input>},{id:'102',content:<textarea defaultValue="i'm textarea"/>}],
-        checkValue : []
-    };
+const Main = ()=> { 
+    const [sidebarElements,setSideBarElements] = useState(initialElements);
+    const [droppedElements,setDroppedElements] = useState([])
 
-    onDragEnd = result => {
-     
+   const onDragEnd = result => {
         const { source, destination } = result;
-
-        console.log('sourceeeee',source)
-        console.log('destination',destination)
       
         if (!destination) {
             return;
@@ -26,39 +24,34 @@ class Main extends Component {
 
         if (source.droppableId === destination.droppableId) {
             if(source.droppableId==='droppable'){
-                let reOrderedValue = reOrderWithInSampleArea(this.state.items,source.index,destination.index)
-                this.setState({
-                    items: reOrderedValue
-                })
+                let reOrderedValue = reOrderWithInSampleArea(sidebarElements,source.index,destination.index)
+                setSideBarElements(reOrderedValue);
             }
             else{
-                let reOrderedValue = reOrderWithInSampleArea(this.state.checkValue,source.index,destination.index)
-                this.setState({
-                    checkValue: reOrderedValue
-                })
+                let reOrderedValue = reOrderWithInSampleArea(droppedElements,source.index,destination.index)
+                setDroppedElements(reOrderedValue);
             }
                   
         } else {
-            let newHtmlElement = generatedElements(source.index,this.state.checkValue.length);
- 
-            this.setState(prevState => ({ checkValue: prevState.checkValue.concat(newHtmlElement)}))
-        }
+            let newHtmlElement = generatedElements(source.index,droppedElements.length);
+            setDroppedElements(prevState => {
+                return [...prevState, ...newHtmlElement];
+            });
     };
+}
 
-    render() {
         return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
+            <DragDropContext onDragEnd={onDragEnd}>
                 <div className="aside-wrapper">
 
-                <SideBarRender items={this.state.items}/>
-                <DroppablePlace checkValue={this.state.checkValue}/>
+                <SideBarRender sidebarElements={sidebarElements}/>
+                <DroppablePlace droppedElements={droppedElements}/>
                 
                    
                
                     </div>
             </DragDropContext>
         );
-    }
-}
+    } 
 
  export default Main

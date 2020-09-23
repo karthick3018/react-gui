@@ -3,7 +3,7 @@
  import {getListStyle,getItemStyle} from '../../helpers/styleFn.js';
 
  const SideBarRender = ({
-    items
+    sidebarElements
  })=>{
      return (
         <Droppable droppableId="droppable">
@@ -11,7 +11,7 @@
                 <div
                     ref={provided.innerRef}
                     style={getListStyle(snapshot.isDraggingOver)}>
-                    {items.map((item, index) => (
+                    {sidebarElements.map((item, index) => (
                         <Draggable
                             key={item.id}
                             draggableId={item.id}
