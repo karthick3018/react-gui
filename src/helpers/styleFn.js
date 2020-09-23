@@ -1,7 +1,7 @@
 
- const grid = 8
+const grid = 8
 
- export const getListStyle = isDraggingOver => ({
+export const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightblue' : 'lightgrey',
     padding: grid,
     width: 250

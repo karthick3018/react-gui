@@ -1,12 +1,12 @@
- import React from 'react';
- import { Droppable, Draggable } from 'react-beautiful-dnd';
- import {getListStyle,getItemStyle} from '../../helpers/styleFn.js';
+import React from 'react';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { getListStyle, getItemStyle } from '../../helpers/styleFn.js';
 
- const SideBarRender = ({
+const SideBarRender = ({
     sidebarElements
- })=>{
-     return (
-        <Droppable droppableId="droppable">
+}) => {
+    return (
+        <Droppable droppableId="sidebar">
             {(provided, snapshot) => (
                 <div
                     ref={provided.innerRef}
@@ -30,11 +30,11 @@
                             )}
                         </Draggable>
                     ))}
-                {provided.placeholder}
-            </div>
-        )}
-    </Droppable>
-     )
- }
+                    {provided.placeholder}
+                </div>
+            )}
+        </Droppable>
+    )
+}
 
- export default SideBarRender;
+export default SideBarRender;

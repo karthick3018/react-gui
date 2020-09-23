@@ -1,10 +1,10 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import {getListStyle,getItemStyle} from '../../helpers/styleFn.js';
+import { getListStyle, getItemStyle } from '../../helpers/styleFn.js';
 
-const DroppablePlace = ({droppedElements}) => {
+const DroppablePlace = ({ droppedElements }) => {
   return (
-    <Droppable droppableId="droppable2">
+    <Droppable droppableId="droppable">
       {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
