@@ -2,11 +2,11 @@ import React from 'react';
 
 export const returnRespectiveHtmlElement = (type) => {
   switch (type) {
-    case 0:
+    case "button":
       return <button>I'm button</button>
-    case 1:
+    case "input":
       return <input defaultValue="i'm input" />
-    case 2:
+    case "textarea":
       return <textarea defaultValue="i'm text area" />
     default:
       return <></>

@@ -6,9 +6,9 @@ import { reOrderWithInSampleArea } from '../../helpers/draggableFn';
 import { generatedElements } from '../../helpers/generateUiElements';
 import './main.css'
 
-const initialElements = [{ id: '100', content:"Button" },
-{ id: '101', content: "Input Box" },
-{ id: '102', content: "Textarea" }
+const initialElements = [{ id: 'button', content:"Button" },
+{ id: 'input', content: "Input Box" },
+{ id: 'textarea', content: "Textarea" }
 ]
 
 const Main = () => {
@@ -16,7 +16,7 @@ const Main = () => {
     const [droppedElements, setDroppedElements] = useState([])
 
     const onDragEnd = result => {
-        const { source, destination } = result;
+        const { source, destination,draggableId } = result;
 
         if (!destination) {
             return;
@@ -33,7 +33,7 @@ const Main = () => {
             }
 
         } else {
-            const newHtmlElement = generatedElements(source.index, droppedElements.length);
+            const newHtmlElement = generatedElements(draggableId, droppedElements.length);
             setDroppedElements(prevState => {
                 return [...prevState, ...newHtmlElement];
             });
