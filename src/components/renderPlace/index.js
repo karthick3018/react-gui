@@ -3,12 +3,15 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import SideBarRender from '../sidebar';
 import DroppablePlace from '../droppablePlace';
 import { reOrderWithInSameArea,reOrderWithOtherArea } from '../../helpers/reOrderFn';
-import { generatedElements } from '../../helpers/generateUiElements';
+import { generateElement } from '../../helpers/generateUiElements';
 import './renderPlace.css'
 
-const initialElements = [{ id: 'button', content:"Button" },
+const initialElements = [
+{ id: 'button', content:"Button" },
 { id: 'input', content: "Input Box" },
-{ id: 'textarea', content: "Textarea" }
+{ id: 'textarea', content: "Textarea" },
+{ id: 'box', content: "Box" },
+{ id: 'heading', content: "Heading" }
 ]
 
 const Main = () => {
@@ -40,7 +43,7 @@ const Main = () => {
             }
 
         } else { //handle drop into droppable area
-            const newHtmlElement = generatedElements(selectedElementType, droppedElements.length);
+            const newHtmlElement = generateElement(selectedElementType, droppedElements.length);
             let valueAfterElementInsertion = reOrderWithOtherArea(droppedElements,destination.index,newHtmlElement);
             setDroppedElements(valueAfterElementInsertion);
              

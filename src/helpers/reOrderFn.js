@@ -6,6 +6,10 @@ export const reOrderWithInSameArea = (state,sourceId,destinationId) => {
   return updatedValue;
 }
 
+/**
+ * @param generatedElement -> holds the new element that is generated after successful drag and drop
+ */
+
 export const reOrderWithOtherArea = (state,destinationId,generatedElement) => {
   let updatedValue = [...state];
   updatedValue.splice(destinationId, 0, generatedElement);

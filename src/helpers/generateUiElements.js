@@ -8,14 +8,18 @@ export const returnRespectiveHtmlElement = (type) => {
       return <input defaultValue="i'm input" />
     case "textarea":
       return <textarea defaultValue="i'm text area" />
+    case "box":
+      return <div className="box" />
+    case "heading":
+      return <h1>Heading1</h1>
     default:
       return <></>
   }
 }
 
-export const generatedElements = (type, id) => {
+export const generateElement = (type, id) => {
   let uiElement = {};
-  uiElement.id = `${200 + id}`;
+  uiElement.id = `${id}`;
   uiElement.content = type;
 
   return uiElement;
