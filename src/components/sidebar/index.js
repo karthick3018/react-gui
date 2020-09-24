@@ -1,12 +1,14 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { getSidebarListStyle, getSidebarItemStyle } from '../../helpers/styleFn.js';
+import {ReactComponent as Menu} from '../../menu.svg';
 import './sidebar.css';
 
 const SideBarRender = ({
     sidebarElements
 }) => {
     return (
+       <div className="sidebar-wrapper">
         <Droppable droppableId="sidebar">
             {(provided, snapshot) => (
                 <div
@@ -27,6 +29,7 @@ const SideBarRender = ({
                                         snapshot.isDragging,
                                         provided.draggableProps.style
                                     )}>
+                                      <Menu/>
                                     {item.content}
                                 </div>
                             )}
@@ -36,6 +39,7 @@ const SideBarRender = ({
                 </div>
             )}
         </Droppable>
+        </div> 
     )
 }
 

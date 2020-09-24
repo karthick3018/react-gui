@@ -19,6 +19,7 @@ const DroppablePlace = ({ droppedElements }) => {
               index={index}>
               {(provided, snapshot) => (
                 <div
+                  className="droppable-element"
                   ref={provided.innerRef}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}

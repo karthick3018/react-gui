@@ -1,8 +1,29 @@
+.sidebar-wrapper{
+  background-color: #2E3648;
+} 
+ .sidebar-element{
+  transition: margin 200ms;
+  margin-left: 1em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+ }
+
  .sidebar-element:hover{
-  margin-left: -0.25rem;
-  margin-right: 0.25rem;
+  margin-left: -0.25em;
+  margin-right: 0.25em;
+  color:gray;
   background-color: #B2F5EA;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
-  color: hsl(185, 40%, 23%);
   cursor: move;
+ }
+
+ svg{
+  width: 20px;
+  height: 15px;
+  margin-right: 10px;
+  opacity: 0.5;
  }

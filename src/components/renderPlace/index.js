@@ -46,6 +46,12 @@ const Main = () => {
                 <SideBarRender sidebarElements={sidebarElements} />
                 <DroppablePlace droppedElements={droppedElements} />
             </div>
+
+               <div className="fn-btn">
+                 <button className="save-btn">Save</button>
+                 <button className="clear-btn">Clear</button>
+                </div>
+                
         </DragDropContext>
     );
 }

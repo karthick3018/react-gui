@@ -6,3 +6,22 @@
   margin: 0 auto;
   height: 100vh;
 }
+
+.fn-btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 35px;
+  display:flex;
+  flex-direction: column;
+}
+.save-btn{
+  margin-bottom: 20px;
+}
+
+.save-btn:hover, .clear-btn:hover{
+  cursor: pointer;
+  box-shadow: 3px 3px 3px 3px #B2F5EA;
+}
+
+ 

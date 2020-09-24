@@ -9,11 +9,9 @@ export const getSidebarListStyle = isDraggingOver => ({
 
 export const getSidebarItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-    color: isDragging?'grey':'white',
+    padding:'10px',
+    color: isDragging&&'grey',
     background: isDragging && '#B2F5EA',
-    
     ...draggableStyle
 });
 
