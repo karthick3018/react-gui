@@ -2,9 +2,9 @@ import React, { useEffect,useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import SideBarRender from '../sidebar';
 import DroppablePlace from '../droppablePlace';
-import { reOrderWithInSameArea,reOrderWithOtherArea } from '../../helpers/draggableFn';
+import { reOrderWithInSameArea,reOrderWithOtherArea } from '../../helpers/reOrderFn';
 import { generatedElements } from '../../helpers/generateUiElements';
-import './main.css'
+import './renderPlace.css'
 
 const initialElements = [{ id: 'button', content:"Button" },
 { id: 'input', content: "Input Box" },
