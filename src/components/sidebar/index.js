@@ -14,7 +14,7 @@ const SideBarRender = ({
                 <div
                     ref={provided.innerRef}
                     style={getSidebarListStyle(snapshot.isDraggingOver)}>
-                    {sidebarElements.map((item, index) => (
+                    {sidebarElements?.map((item, index) => (
                         <Draggable
                             key={item.id}
                             draggableId={item.id}

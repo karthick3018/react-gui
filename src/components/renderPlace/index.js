@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import SideBarRender from '../sidebar';
 import DroppablePlace from '../droppablePlace';
@@ -13,7 +13,14 @@ const initialElements = [{ id: 'button', content:"Button" },
 
 const Main = () => {
     const [sidebarElements, setSideBarElements] = useState(initialElements);
-    const [droppedElements, setDroppedElements] = useState([])
+    const [droppedElements, setDroppedElements] = useState([]);
+
+    useEffect(()=>{
+       const previousElements = JSON.parse(localStorage.getItem("movedElements"));
+       if(previousElements && previousElements?.length){
+           setDroppedElements(previousElements);
+       }
+    },[])
 
     const onDragEnd = result => {
         const { source, destination,draggableId } = result;
@@ -39,6 +46,15 @@ const Main = () => {
             });
         };
     }
+    
+    const handleSave = () => {
+      localStorage.setItem('movedElements',JSON.stringify(droppedElements))
+    }
+
+    const handleClear = () => {
+         setDroppedElements([]);
+         localStorage.removeItem('movedElements')
+    }
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
@@ -47,9 +63,9 @@ const Main = () => {
                 <DroppablePlace droppedElements={droppedElements} />
             </div>
 
-               <div className="fn-btn">
-                 <button className="save-btn">Save</button>
-                 <button className="clear-btn">Clear</button>
+               <div className="btn-wrap">
+                 <button onClick={handleSave} className="save-btn">Save</button>
+                 <button onClick={handleClear} className="clear-btn">Clear</button>
                 </div>
                 
         </DragDropContext>

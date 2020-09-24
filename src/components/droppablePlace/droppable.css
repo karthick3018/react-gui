@@ -11,3 +11,9 @@
   width: 100%;
   display: flex;
 }
+
+.tour-text{
+  display: grid;
+  justify-content: center;
+  opacity: 0.3;
+}

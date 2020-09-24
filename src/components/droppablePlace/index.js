@@ -1,6 +1,7 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import {  getDraggableItemStyle } from '../../helpers/styleFn.js';
+import {returnRespectiveHtmlElement} from '../../helpers/generateUiElements';
 import './droppable.css'
 
 const DroppablePlace = ({ droppedElements }) => {
@@ -10,9 +11,9 @@ const DroppablePlace = ({ droppedElements }) => {
         <div
           className="droppable-wrapper"
           ref={provided.innerRef}
-          // style={getDraggableListStyle(snapshot.isDraggingOver)}
           >
-          {droppedElements.map((item, index) => (
+          {droppedElements?.length ? 
+           droppedElements?.map((item, index) => (
             <Draggable
               key={item.id}
               draggableId={item.id}
@@ -27,11 +28,11 @@ const DroppablePlace = ({ droppedElements }) => {
                     snapshot.isDragging,
                     provided.draggableProps.style
                   )}>
-                  {item.content}
+                  {returnRespectiveHtmlElement(item.content)}
                 </div>
               )}
             </Draggable>
-          ))}
+          )):<p className="tour-text">*Drag & Drop some component to start</p>}
         </div>
       )}
     </Droppable>
