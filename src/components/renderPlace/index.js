@@ -14,7 +14,7 @@ const initialElements = [
     { id: 'heading', element: "Heading" }
 ]
 
-const Main = () => {
+const RenderPlace = () => {
     const [sidebarElements, setSideBarElements] = useState(initialElements);
     const [droppedElements, setDroppedElements] = useState([]);
 
@@ -75,4 +75,4 @@ const Main = () => {
     );
 }
 
-export default Main
+export default RenderPlace
