@@ -31,13 +31,14 @@ const RenderPlace = () => {
         if (!destination) return;
 
         if (source.droppableId === destination.droppableId) {
+            let reOrderedValue;
             if (source.droppableId === 'sidebar') { 
                 //handle drop inside sidebar
-                const reOrderedValue = reOrderWithInSameArea(sidebarElements, source.index, destination.index)
+                reOrderedValue = reOrderWithInSameArea(sidebarElements, source.index, destination.index)
                 setSideBarElements(reOrderedValue);
             }
             else {
-                const reOrderedValue = reOrderWithInSameArea(droppedElements, source.index, destination.index)
+                reOrderedValue = reOrderWithInSameArea(droppedElements, source.index, destination.index)
                 setDroppedElements(reOrderedValue);
             }
 
@@ -51,7 +52,11 @@ const RenderPlace = () => {
     }
 
     const handleSave = () => {
-        localStorage.setItem('movedElements', JSON.stringify(droppedElements))
+        if(droppedElements?.length){
+            localStorage.setItem('movedElements', JSON.stringify(droppedElements))
+            alert('Elements Saved!')
+        }
+       
     }
 
     const handleClear = () => {
