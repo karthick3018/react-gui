@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import SideBarRender from '../sidebar';
 import DroppablePlace from '../droppablePlace';
-import { reOrderWithInSampleArea } from '../../helpers/draggableFn';
+import { reOrderWithInSameArea,reOrderWithOtherArea } from '../../helpers/draggableFn';
 import { generatedElements } from '../../helpers/generateUiElements';
 import './main.css'
 
@@ -23,7 +23,7 @@ const Main = () => {
     },[])
 
     const onDragEnd = result => {
-        const { source, destination,draggableId } = result;
+        const { source, destination,draggableId: selectedElementType } = result;
 
         if (!destination) {
             return;
@@ -31,19 +31,19 @@ const Main = () => {
 
         if (source.droppableId === destination.droppableId) {
             if (source.droppableId === 'sidebar') {
-                const reOrderedValue = reOrderWithInSampleArea(sidebarElements, source.index, destination.index)
+                const reOrderedValue = reOrderWithInSameArea(sidebarElements, source.index, destination.index)
                 setSideBarElements(reOrderedValue);
             }
             else {
-                const reOrderedValue = reOrderWithInSampleArea(droppedElements, source.index, destination.index)
+                const reOrderedValue = reOrderWithInSameArea(droppedElements, source.index, destination.index)
                 setDroppedElements(reOrderedValue);
             }
 
         } else {
-            const newHtmlElement = generatedElements(draggableId, droppedElements.length);
-            setDroppedElements(prevState => {
-                return [...prevState, ...newHtmlElement];
-            });
+            const newHtmlElement = generatedElements(selectedElementType, droppedElements.length);
+            let valueAfterElementInsertion = reOrderWithOtherArea(droppedElements,destination.index,newHtmlElement);
+            setDroppedElements(valueAfterElementInsertion);
+             
         };
     }
     
@@ -58,12 +58,12 @@ const Main = () => {
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
-            <div className="aside-wrapper">
+            <div className="render-wrapper">
                 <SideBarRender sidebarElements={sidebarElements} />
                 <DroppablePlace droppedElements={droppedElements} />
             </div>
 
-               <div className="btn-wrap">
+               <div className="btn-wrapper">
                  <button onClick={handleSave} className="save-btn">Save</button>
                  <button onClick={handleClear} className="clear-btn">Clear</button>
                 </div>

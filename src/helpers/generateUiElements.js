@@ -14,12 +14,10 @@ export const returnRespectiveHtmlElement = (type) => {
 }
 
 export const generatedElements = (type, id) => {
-  const uiElementArray = [];
+  let uiElement = {};
+  uiElement.id = `${200 + id}`;
+  uiElement.content = type;
 
-  uiElementArray.push({
-    id: `${200 + id}`,
-    content: type
-  })
-  return uiElementArray;
+  return uiElement;
 }
 
