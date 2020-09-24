@@ -19,6 +19,7 @@ const SideBarRender = ({
                             index={index}>
                             {(provided, snapshot) => (
                                 <div
+                                   className="sidebar-element"
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}

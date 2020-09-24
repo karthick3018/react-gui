@@ -3,4 +3,5 @@
   background-color: rgb(237, 242, 246);
   width: 100%;
   border: 1px solid;
+  overflow-y: scroll;
 }
