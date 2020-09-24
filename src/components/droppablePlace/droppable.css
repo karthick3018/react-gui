@@ -12,7 +12,7 @@
   display: flex;
 }
 
-.tour-text{
+.help-text{
   display: grid;
   justify-content: center;
   opacity: 0.3;

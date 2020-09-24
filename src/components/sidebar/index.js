@@ -30,7 +30,7 @@ const SideBarRender = ({
                                         provided.draggableProps.style
                                     )}>
                                       <Menu/>
-                                    {item.content}
+                                    {item.element}
                                 </div>
                             )}
                         </Draggable>

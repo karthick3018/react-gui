@@ -20,7 +20,7 @@ export const returnRespectiveHtmlElement = (type) => {
 export const generateElement = (type, id) => {
   let uiElement = {};
   uiElement.id = `${id}`;
-  uiElement.content = type;
+  uiElement.element = type;
 
   return uiElement;
 }

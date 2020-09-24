@@ -1,39 +1,38 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import SideBarRender from '../sidebar';
 import DroppablePlace from '../droppablePlace';
-import { reOrderWithInSameArea,reOrderWithOtherArea } from '../../helpers/reOrderFn';
+import { reOrderWithInSameArea, reOrderWithOtherArea } from '../../helpers/reOrderFn';
 import { generateElement } from '../../helpers/generateUiElements';
 import './renderPlace.css'
 
 const initialElements = [
-{ id: 'button', content:"Button" },
-{ id: 'input', content: "Input Box" },
-{ id: 'textarea', content: "Textarea" },
-{ id: 'box', content: "Box" },
-{ id: 'heading', content: "Heading" }
+    { id: 'button', element: "Button" },
+    { id: 'input', element: "Input Box" },
+    { id: 'textarea', element: "Textarea" },
+    { id: 'box', element: "Box" },
+    { id: 'heading', element: "Heading" }
 ]
 
 const Main = () => {
     const [sidebarElements, setSideBarElements] = useState(initialElements);
     const [droppedElements, setDroppedElements] = useState([]);
 
-    useEffect(()=>{
-       const previousElements = JSON.parse(localStorage.getItem("movedElements"));
-       if(previousElements && previousElements?.length){
-           setDroppedElements(previousElements);
-       }
-    },[])
+    useEffect(() => {
+        const previousElements = JSON.parse(localStorage.getItem("movedElements"));
+        if (previousElements && previousElements?.length) {
+            setDroppedElements(previousElements);
+        }
+    }, [])
 
     const onDragEnd = result => {
-        const { source, destination,draggableId: selectedElementType } = result;
+        const { source, destination, draggableId: selectedElementType } = result;
 
-        if (!destination) {
-            return;
-        }
+        if (!destination) return;
 
         if (source.droppableId === destination.droppableId) {
-            if (source.droppableId === 'sidebar') { //handle drop inside sidebar
+            if (source.droppableId === 'sidebar') { 
+                //handle drop inside sidebar
                 const reOrderedValue = reOrderWithInSameArea(sidebarElements, source.index, destination.index)
                 setSideBarElements(reOrderedValue);
             }
@@ -42,21 +41,22 @@ const Main = () => {
                 setDroppedElements(reOrderedValue);
             }
 
-        } else { //handle drop into droppable area
+        } else { 
+            //handle drop into droppable area
             const newHtmlElement = generateElement(selectedElementType, droppedElements.length);
-            let valueAfterElementInsertion = reOrderWithOtherArea(droppedElements,destination.index,newHtmlElement);
+            let valueAfterElementInsertion = reOrderWithOtherArea(droppedElements, destination.index, newHtmlElement);
             setDroppedElements(valueAfterElementInsertion);
-             
+
         };
     }
-    
+
     const handleSave = () => {
-      localStorage.setItem('movedElements',JSON.stringify(droppedElements))
+        localStorage.setItem('movedElements', JSON.stringify(droppedElements))
     }
 
     const handleClear = () => {
-         setDroppedElements([]);
-         localStorage.removeItem('movedElements')
+        setDroppedElements([]);
+        localStorage.removeItem('movedElements')
     }
 
     return (
@@ -66,11 +66,11 @@ const Main = () => {
                 <DroppablePlace droppedElements={droppedElements} />
             </div>
 
-               <div className="btn-wrapper">
-                 <button onClick={handleSave} className="save-btn">Save</button>
-                 <button onClick={handleClear} className="clear-btn">Clear</button>
-                </div>
-                
+            <div className="btn-wrapper">
+                <button onClick={handleSave} className="save-btn">Save</button>
+                <button onClick={handleClear} className="clear-btn">Clear</button>
+            </div>
+
         </DragDropContext>
     );
 }

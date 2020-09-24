@@ -28,11 +28,11 @@ const DroppablePlace = ({ droppedElements }) => {
                     snapshot.isDragging,
                     provided.draggableProps.style
                   )}>
-                  {returnRespectiveHtmlElement(item.content)}
+                  {returnRespectiveHtmlElement(item.element)}
                 </div>
               )}
             </Draggable>
-          )):<p className="tour-text">*Drag & Drop some component to start</p>}
+          )):<p className="help-text">*Drag & Drop some component to start</p>}
         </div>
       )}
     </Droppable>
