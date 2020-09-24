@@ -20,7 +20,7 @@ export const getDraggableItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
     padding: grid * 2,
     margin: `0 0 ${grid}px 0`,
-    background: isDragging && 'lightgreen' ,
+    background: isDragging && '#B2F5EA' ,
     ...draggableStyle
 });
 
