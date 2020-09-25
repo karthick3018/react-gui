@@ -3,8 +3,8 @@ import {generateElement,returnRespectiveHtmlElement} from '../helpers/generateUi
 
 
 test('check generateElement function',()=>{
-  let result,temp={id:'3',element:'button'};
-  result = generateElement('button','3');
+  let result,temp={id:'301',element:'button'};
+  result = generateElement('button','301');
   expect(temp).toEqual(expect.objectContaining(result));
 })
 
