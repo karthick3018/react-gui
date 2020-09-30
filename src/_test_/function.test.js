@@ -8,7 +8,7 @@ test('check generateElement function',()=>{
   expect(temp).toEqual(expect.objectContaining(result));
 })
 
-test('check returnRespectiveHtmlElement function',()=>{
+it('checks returnRespectiveHtmlElement function',()=>{
    let JsxElement = returnRespectiveHtmlElement('button');
    const { getByText } = render(JsxElement);
    const createdElement = getByText(/i'm button/i);
