@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import SideBarRender from '../sidebar';
-import DroppablePlace from '../droppablePlace';
 import { reOrderWithInSameArea, reOrderWithOtherArea } from '../../helpers/reOrderFn';
 import { generateElement } from '../../helpers/generateUiElements';
 import './renderPlace.css'
+const DroppablePlace = React.lazy(() => import('../droppablePlace'));
+
 
 const initialElements = [
     { id: 'button', element: "Button" },
@@ -68,7 +69,9 @@ const RenderPlace = () => {
         <DragDropContext onDragEnd={onDragEnd}>
             <div className="render-wrapper">
                 <SideBarRender sidebarElements={sidebarElements} />
-                <DroppablePlace droppedElements={droppedElements} />
+                <Suspense fallback={<div>DroppablePlace loading...</div>}>
+                 <DroppablePlace droppedElements={droppedElements} />
+                </Suspense>
             </div>
 
             <div className="btn-wrapper">
