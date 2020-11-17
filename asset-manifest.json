@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/react-gui/static/css/main.808f7f97.chunk.css",
+    "main.js": "/react-gui/static/js/main.43a7afd3.chunk.js",
+    "main.js.map": "/react-gui/static/js/main.43a7afd3.chunk.js.map",
+    "runtime-main.js": "/react-gui/static/js/runtime-main.adc994c6.js",
+    "runtime-main.js.map": "/react-gui/static/js/runtime-main.adc994c6.js.map",
+    "static/js/2.d073bb80.chunk.js": "/react-gui/static/js/2.d073bb80.chunk.js",
+    "static/js/2.d073bb80.chunk.js.map": "/react-gui/static/js/2.d073bb80.chunk.js.map",
+    "static/css/3.8d197ef7.chunk.css": "/react-gui/static/css/3.8d197ef7.chunk.css",
+    "static/js/3.08bd505e.chunk.js": "/react-gui/static/js/3.08bd505e.chunk.js",
+    "static/js/3.08bd505e.chunk.js.map": "/react-gui/static/js/3.08bd505e.chunk.js.map",
+    "index.html": "/react-gui/index.html",
+    "precache-manifest.72cf0262077349dcd2a37dd6f1ec27ea.js": "/react-gui/precache-manifest.72cf0262077349dcd2a37dd6f1ec27ea.js",
+    "service-worker.js": "/react-gui/service-worker.js",
+    "static/css/3.8d197ef7.chunk.css.map": "/react-gui/static/css/3.8d197ef7.chunk.css.map",
+    "static/css/main.808f7f97.chunk.css.map": "/react-gui/static/css/main.808f7f97.chunk.css.map",
+    "static/js/2.d073bb80.chunk.js.LICENSE.txt": "/react-gui/static/js/2.d073bb80.chunk.js.LICENSE.txt",
+    "static/media/menu.6ac51f04.svg": "/react-gui/static/media/menu.6ac51f04.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.adc994c6.js",
+    "static/js/2.d073bb80.chunk.js",
+    "static/css/main.808f7f97.chunk.css",
+    "static/js/main.43a7afd3.chunk.js"
+  ]
+}
